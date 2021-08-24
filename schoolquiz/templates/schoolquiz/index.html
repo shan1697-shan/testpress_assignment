@@ -1,0 +1,32 @@
+{% extends 'schoolquiz/base.html' %}
+{% block head %}
+{% load static %}
+    <link rel='stylesheet' href="{% static 'schoolquiz/css/style.css' %}">
+{% endblock %}        
+{% block body %}
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      {% load static %}
+      <img src="{% static 'schoolquiz/images/user_icon.png' %}" id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
+    <form method="POST">{% csrf_token %}
+      <input type="text" id="login" class="fadeIn second" name="username" placeholder="Username">
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+      <input type="submit" clasForgot Password?s="fadeIn fourth" value="Log In">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+        <label>Don't have an account?</label><br>
+      <a class="underlineHover" href="register">Sign Up</a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'schoolquiz/base.html' %}
+{% block head %}
+{% load static %}
+    <link rel='stylesheet' href="{% static 'schoolquiz/css/ansquestion.css' %}">
+{% endblock %}        
+{% block body %}
+{% for i in questions %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10 col-lg-10">
+            <div class="border">
+                <form method="POST">{% csrf_token %}
+                <div class="question bg-white p-3 border-bottom">
+                    <div class="d-flex flex-row align-items-center question-title">
+                        <h3 class="text-danger">Q.</h3>
+                        <h5 class="mt-1 ml-2">{{i.question}}</h5>
+                    </div>
+                    <div class="ans ml-2">
+                        <label class="radio"> <input type="radio" name="option1" value="{{i.option1}}"> <span>{{i.option1}}</span>
+                        </label>
+                    </div>
+                    <div class="ans ml-2">
+                        <label class="radio"> <input type="radio" name="option2" value="{{i.option2}}"> <span>{{i.option2}}</span>
+                        </label>
+                    </div>
+                    <div class="ans ml-2">
+                        <label class="radio"> <input type="radio" name="option3" value="{{i.option3}}"> <span>{{i.option3}}</span>
+                        </label>
+                    </div>
+                    <div class="ans ml-2">
+                        <label class="radio"> <input type="radio" name="option4" value="{{i.option4}}"> <span>{{i.option4}}</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white"><button class="btn btn-primary border-success align-items-center btn-success" type="submit" value="submit">Submit<i class="fa fa-angle-right ml-2"></i></button></div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <a href="result?name={{i.name}}&&by={{i.createdby}}&&on={{i.createdon}}"><button class="btn btn-success">View Result</button></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

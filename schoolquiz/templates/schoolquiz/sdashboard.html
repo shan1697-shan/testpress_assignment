@@ -1,0 +1,25 @@
+{% extends 'schoolquiz/base.html' %}
+{% block head %}
+
+{% endblock %}        
+{% block body %}
+<div class="container">
+    <div class="col-sm-12">
+        <div class="col-sm=12" style="margin-top: 20px; margin-bottom: 20px;" align="center">
+            <a href="/logout"><button type="submit" class="btn btn-danger">{{request.user}}, Logout</button></a>
+        </div><br>
+{% for i in quiz %}
+<div class="col-sm-4">
+<div class="card" style="width: 18rem; margin-top: 20;">
+    <div class="card-body">
+      <h5 class="card-title">{{i.name}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{i.createdby}}</h6>
+      <p class="card-text">{{i.createdon}}</p>
+      <a href="ansquestions?name={{i.name}}&&by={{i.createdby}}&&on={{i.createdon}}" class="card-link">Take Test</a>
+    </div>
+  </div>
+</div> 
+{% endfor %}
+</div>
+</div>
+{% endblock %}

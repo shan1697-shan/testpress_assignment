@@ -1,0 +1,43 @@
+{% extends 'schoolquiz/base.html' %}
+{% block head %}
+
+{% endblock %}        
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm=12" style="margin-top: 20px; margin-bottom: 20px;" align="center">
+                <a href="/logout"><button type="submit" class="btn btn-danger">{{request.user}}, Logout</button></a>
+            </div><br>
+            <div class="col-sm-8" align="center">
+                <label>QUIZ Name: {{data.name}}</label><br>
+                <label>Author: {{data.by}}</label><br>
+                <label>Created On: {{data.on}}</label>
+            </div>
+            
+            {% for i in questions %}
+            <div class="col-sm-6">
+                <label>Question:</label>
+                <p>{{i.question}}</p><br>
+                <p>A. {{i.option1}}</p> &nbsp;<p>B. {{i.option2}}</p> &nbsp;<p>C. {{i.option3}}</p> &nbsp;<p>D. {{i.option4}}</p>
+            </div>
+            {% endfor %}
+            <div class="col-sm-6">
+            <form method="POST">
+                {% csrf_token %}
+                <label>Question:</label><br>
+                <input type="text" name="question" class="form-control">
+                <label>Options:</label>
+                <input type="text" name="option1" style="margin-left: 10px; margin-top: 20px;" class="form-control">
+                <input type="text" name="option2" style="margin-left: 10px; margin-top: 20px;" class="form-control">
+                <input type="text" name="option3" style="margin-left: 10px; margin-top: 20px;" class="form-control">
+                <input type="text" name="option4" style="margin-left: 10px; margin-top: 20px;" class="form-control"><br>
+                <label>Answer:</label>
+                <input type="text" name="answer" style="margin-left: 10px; margin-top: 20px;" class="form-control"><br>
+                <input type="submit" name="submit" value="SAVE" class="btn btn-success">
+            </form>
+        </div>
+</div>
+</div>
+</div>
+{% endblock %}
