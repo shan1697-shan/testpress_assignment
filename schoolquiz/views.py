@@ -90,18 +90,21 @@ def take_quiz(request):
             answer = option3
         else:
             answer = option4
+        
         que = Questions.objects.get(relatedquiz=query,question=question)
         if answer==que.answer:
             correct = True
         else:
             correct = False
-        ans = Answer(quiz=query,question=que,answer=answer, correct=correct)
+        ans = Answer(quiz=query,question=que,answer=answer, correct=correct, student=request.user)
         ans.save()
-    return render(request, "schoolquiz/ansquestions.html",{"data":request.GET,"questions":questions})
+
+    return render(request, "schoolquiz/ansquestions.html",{"data":request.GET,"questions":questions, "name":request.GET['name'], "by":request.GET['by']})
 
 def result(request):
-    query = Answer.objects.filter(quiz=Quiz.objects.get(name=request.GET['name'],createdby=User.objects.get(username=request.GET['by'])))
-    query2 = Answer.objects.filter(quiz=Quiz.objects.get(name=request.GET['name'],createdby=User.objects.get(username=request.GET['by'])),correct=True)
+    print(request.GET['name'])
+    query = Answer.objects.filter(quiz=Quiz.objects.get(name=request.GET['name'],createdby=User.objects.get(username=request.GET['by'])),student=request.user)
+    query2 = Answer.objects.filter(quiz=Quiz.objects.get(name=request.GET['name'],createdby=User.objects.get(username=request.GET['by'])),correct=True,student=request.user)
     return render(request,"schoolquiz/result.html",{"obtained":len(query2),"total":len(query)})
 
 def logout_view(request):

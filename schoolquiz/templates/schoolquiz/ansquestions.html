@@ -5,6 +5,11 @@
 {% endblock %}        
 {% block body %}
 {% for i in questions %}
+<div class="container">
+    <div class="col-sm-12">
+        <div class="col-sm=12" style="margin-top: 20px; margin-bottom: 20px;" align="center">
+            <a href="/logout"><button type="submit" class="btn btn-danger">{{request.user}}, Logout</button></a>
+        </div><br>
 <div class="container mt-5">
     <div class="d-flex justify-content-center row">
         <div class="col-md-10 col-lg-10">
@@ -13,7 +18,7 @@
                 <div class="question bg-white p-3 border-bottom">
                     <div class="d-flex flex-row align-items-center question-title">
                         <h3 class="text-danger">Q.</h3>
-                        <h5 class="mt-1 ml-2">{{i.question}}</h5>
+                        <h5 class="mt-1 ml-2"><input type="hidden" name="question" value="{{i.question}}">{{i.question}}</h5>
                     </div>
                     <div class="ans ml-2">
                         <label class="radio"> <input type="radio" name="option1" value="{{i.option1}}"> <span>{{i.option1}}</span>
@@ -42,7 +47,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12" align="center">
-            <a href="result?name={{i.name}}&&by={{i.createdby}}&&on={{i.createdon}}"><button class="btn btn-success">View Result</button></a>
+            <a href="result?name={{name}}&&by={{by}}"><button class="btn btn-success">View Result</button></a>
         </div>
     </div>
 </div>
